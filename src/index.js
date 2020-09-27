@@ -43,6 +43,20 @@ function losAngTemp(response) {
   let currentTemp = document.querySelector(".temp");
   currentTemp.innerHTML = temp;
 
+  let hiTemp = Math.round(response.data.main.temp_max);
+  let celsHiTemp = Math.round(((hiTemp - 32) * 5) / 9);
+  let hi = document.querySelector(".current-hi");
+  hi.innerHTML = `${hiTemp}°F/${celsHiTemp}°C`;
+
+  let lowTemp = Math.round(response.data.main.temp_min);
+  let celsLowTemp = Math.round(((lowTemp - 32) * 5) / 9);
+  let low = document.querySelector(".current-low");
+  low.innerHTML = `${lowTemp}°F/${celsLowTemp}°C`;
+
+  let humidityTemp = response.data.main.humidity;
+  let humidity = document.querySelector(".current-humidity");
+  humidity.innerHTML = humidityTemp;
+
   function faren(event) {
     event.preventDefault(event);
     let currentTemp = document.querySelector(".temp");
@@ -78,9 +92,24 @@ function searchNow(event) {
     axios.get(apiUrl).then(showTemp);
 
     function showTemp(response) {
+      console.log(response.data);
       let temp = Math.round(response.data.main.temp);
       let currentTemp = document.querySelector(".temp");
       currentTemp.innerHTML = temp;
+
+      let hiTemp = Math.round(response.data.main.temp_max);
+      let celsHiTemp = Math.round(((hiTemp - 32) * 5) / 9);
+      let hi = document.querySelector(".current-hi");
+      hi.innerHTML = `${hiTemp}°F/${celsHiTemp}°C`;
+
+      let lowTemp = Math.round(response.data.main.temp_min);
+      let celsLowTemp = Math.round(((lowTemp - 32) * 5) / 9);
+      let low = document.querySelector(".current-low");
+      low.innerHTML = `${lowTemp}°F/${celsLowTemp}°C`;
+
+      let humidityTemp = response.data.main.humidity;
+      let humidity = document.querySelector(".current-humidity");
+      humidity.innerHTML = humidityTemp;
 
       function faren(event) {
         event.preventDefault(event);
@@ -122,6 +151,20 @@ function searchCity(event) {
     let currentTemp = document.querySelector(".temp");
     currentTemp.innerHTML = temp;
 
+    let hiTemp = Math.round(response.data.main.temp_max);
+    let celsHiTemp = Math.round(((hiTemp - 32) * 5) / 9);
+    let hi = document.querySelector(".current-hi");
+    hi.innerHTML = `${hiTemp}°F/${celsHiTemp}°C`;
+
+    let lowTemp = Math.round(response.data.main.temp_min);
+    let celsLowTemp = Math.round(((lowTemp - 32) * 5) / 9);
+    let low = document.querySelector(".current-low");
+    low.innerHTML = `${lowTemp}°F/${celsLowTemp}°C`;
+
+    let humidityTemp = response.data.main.humidity;
+    let humidity = document.querySelector(".current-humidity");
+    humidity.innerHTML = humidityTemp;
+
     function faren(event) {
       event.preventDefault(event);
       let currentTemp = document.querySelector(".temp");
@@ -143,3 +186,19 @@ function searchCity(event) {
 }
 let searchButton = document.querySelector(".btn-primary");
 searchButton.addEventListener("click", searchCity);
+
+//5 day
+function searchForecast(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-text-input");
+  let units = "imperial";
+  let apiKey = "1b9a19801a7a96280358cc2498e9820b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city.value}&appid=${apiKey}&units=${units}`;
+
+  function weeklyForecast(response) {
+    console.log(response.data.list);
+  }
+  axios.get(apiUrl).then(weeklyForecast);
+}
+let searchButtonForecast = document.querySelector(".btn-primary");
+searchButtonForecast.addEventListener("click", searchForecast);

@@ -108,7 +108,16 @@ footer {
   text-align: center;
   padding-top: 8px;
 }
-
+.git {
+  text-align: right;
+  font-size: 1.1em;
+  color: #68c2f7;
+  font-family: "Playfair Display", serif;
+  text-decoration: underline;
+}
+.git:hover {
+  color: #54a2cf;
+}
 @media only screen and (min-width: 1001px) {
   .current-image {
     max-width: 600px;

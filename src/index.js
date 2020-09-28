@@ -188,7 +188,7 @@ let searchButton = document.querySelector(".btn-primary");
 searchButton.addEventListener("click", searchCity);
 
 //5 day
-function searchForecast(event) {
+/*function searchForecast(event) {
   event.preventDefault();
   let city = document.querySelector("#search-text-input");
   let units = "imperial";
@@ -197,8 +197,22 @@ function searchForecast(event) {
 
   function weeklyForecast(response) {
     console.log(response.data.list);
+    $.ajax({
+      url: apiUrl,
+      type: "GET",
+      data: {
+        q: city,
+        unit: imperial,
+        date: dt_txt,
+        min: temp_min,
+        max: temp_max,
+      },
+      console.log(ajax);
+    });
   }
   axios.get(apiUrl).then(weeklyForecast);
 }
 let searchButtonForecast = document.querySelector(".btn-primary");
 searchButtonForecast.addEventListener("click", searchForecast);
+*/
+//Math.min() Math.max()

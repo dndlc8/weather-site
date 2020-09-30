@@ -1,140 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://kit.fontawesome.com/af9fcacd76.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="src/styles.css" />
 
-    <title>Local Weather</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <script src="https://kit.fontawesome.com/af9fcacd76.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="public/luxon.min.js"></script>
+  <script src="public/js/iconMapper.js"></script>
+  <link rel="stylesheet" href="src/styles.css" />
+  <title>Local Weather</title>
+</head>
 
-  <body>
-    <div class="header">
-      <form id="city-search">
-        <input
-          id="search-text-input"
-          type="text"
-          placeholder="🔍 Search Location"
-          autofocus="on"
-        />
-        <input type="submit" class="btn btn-primary" value="Search" />
-        <input type="submit" class="btn btn-info" value="Current" />
-      </form>
-      <h1>Los Angeles, CA</h1>
-      <h2>
-        Monday 9/20/2020
-        <br />
-        18:08
-      </h2>
-    </div>
-    <div class="container">
-      <section class="current">
-        <img
-          class="current-image"
-          src="weather_images/weather symbols/overcast.png"
-        />
-        <article class="col">
-          <span class="temp"></span>
-          <a class="measurement farenheit" href="">°F|</a>
-          <a class="measurement celsius" href="">°C</a>
-        </article>
-        <div class="current-temps col-12">
-          <span class="current-temps-font">Hi: </span
-          ><span class="current-hi"></span><br /><span
-            class="current-temps-font"
-            >Low: </span
-          ><span class="current-low"></span> <br /><span
-            class="current-temps-font"
-            >Humidity: </span
-          ><span class="current-humidity"></span>
-        </div>
-        <img
-          class="small-current-image"
-          src="weather_images/weather symbols/overcast.png"
-        />
-      </section>
-      <section class="weekly">
-        <div class="row">
-          <img
-            class="weekly-symbols col-2"
-            src="weather_images/weather symbols/sunny.png"
-            ;
-          />
-          <div class="day col">Tuesday</div>
-          <div class="hi col">93°F</div>
-          <div class="low col">64°F</div>
-        </div>
-        <div class="row">
-          <img
-            class="weekly-symbols col-2"
-            src="weather_images/weather symbols/sunny.png"
-          />
-          <div class="day col">Wednesday</div>
-          <div class="hi col">93°F</div>
-          <div class="low col">66°F</div>
-        </div>
-        <div class="row">
-          <img
-            class="weekly-symbols col-2"
-            src="weather_images/weather symbols/sunny_to_cloudy.png"
-          />
-          <div class="day col">Thursday</div>
-          <div class="hi col">94°F</div>
-          <div class="low col">66°F</div>
-        </div>
-        <div class="row">
-          <img
-            class="weekly-symbols col-2"
-            src="weather_images/weather symbols/sunny_to_cloudy.png"
-          />
-          <div class="day col">Friday</div>
-          <div class="hi col">94°F</div>
-          <div class="low col">66°F</div>
-        </div>
-        <div class="row">
-          <img
-            class="weekly-symbols col-2"
-            src="weather_images/weather symbols/sunny_to_cloudy.png"
-          />
-          <div class="day col">Saturday</div>
-          <div class="hi col">89°F</div>
-          <div class="low col">60°F</div>
-        </div>
-        <div class="row">
-          <img
-            class="weekly-symbols col-2"
-            src="weather_images/weather symbols/overcast.png"
-          />
-          <div class="day col">Sunday</div>
-          <div class="hi col">82°F</div>
-          <div class="low col">57°F</div>
-        </div>
-      </section>
-      <p>Be safe! Unhealthy Air Quality</p>
-    </div>
-    <footer>
-      <a class="git" href="https://github.com/dndlc8/weather-site"
-        >Open-source code</a
-      >
-      by Dominique De La Cruz
+<body onload="searchNow()">
+  <div class="header">
+    <form id="city-search">
+      <input id="city-search-text-input" type="text" placeholder="🔍 Search Location" autofocus="on" />
+      <input id="country-search-text-input" type="text" placeholder="Two Letter Country Code" autofocus="on" />
+      <input type="submit" class="btn btn-primary" value="Search" />
+      <input type="submit" class="btn btn-info" value="Current" />
+    </form>
+    <h1></h1>
+    <h2>
+      Monday 9 20, 2020
       <br />
-    </footer>
-    <script src="src/index.js"></script>
-  </body>
+      18:08
+    </h2>
+  </div>
+  <div class="container">
+    <section class="current">
+      <div class="weather-container">
+        <div>
+          <h2 class="city-name">Currently, Where You Are:</h2>
+          <h3>Monday 9/20/2020 18:08</h3>
+          <article class="col">
+            <span class="temp"></span>
+            <a class="measurement farenheit" href="">°F|</a>
+            <a class="measurement celsius" href="">°C</a>
+          </article>
+          <div class="current-temps col-12">
+            <span class="current-temps-font">Hi: </span><span class="current-hi"></span><br /><span
+              class="current-temps-font">Low: </span><span class="current-low"></span> <br />
+            <span class="current-temps-font">
+              Precipitation: <span class="precipitation"></span>% </span><br /><span
+              class="current-temps-font">Humidity:
+              <span class="current-humidity"></span> %</span>
+            <br />
+            <span class="current-temps-font">
+              Wind Speed: <span class="wind-speed"></span> mph
+            </span>
+          </div>
+        </div>
+        <div>
+          <img class="main-image" id="main-image" src="weather_images/weather symbols/overcast.png" />
+        </div>
+
+    </section>
+    <section class="weekly">
+      <div class="row">
+        <img class="weekly-symbols figure-img col-2" src="weather_images/weather symbols/sunny.png" />
+        <div class="day col">
+          <span class="day-name tomorrow"> </span> <br /><span class="description">Sunny</span>
+        </div>
+        <div class="hi col"><span class="hi-temp">93</span>°F</div>
+        <div class="low col"><span class="low-temp">64</span>°F</div>
+        <div class="descSm">Sunny</div>
+      </div>
+      <div class="row">
+        <img class="weekly-symbols col-2" src="weather_images/weather symbols/sunny.png" />
+        <div class="day col">
+          <span class="day-name day-three"> </span> <br /><span class="description">Sunny</span>
+        </div>
+        <div class="hi col"><span class="hi-temp">93</span>°F</div>
+        <div class="low col"><span class="low-temp">66</span>°F</div>
+        <div class="descSm">Sunny</div>
+      </div>
+      <div class="row">
+        <img class="weekly-symbols col-2" src="weather_images/weather symbols/sunny_to_cloudy.png" />
+        <div class="day col">
+          <span class="day-name day-four"> </span> <br /><span class="description">Sunny</span>
+        </div>
+        <div class="hi col"><span class="hi-temp">94</span>°F</div>
+        <div class="low col"><span class="low-temp">66</span>°F</div>
+        <div class="descSm">Sunny</div>
+      </div>
+      <div class="row">
+        <img class="weekly-symbols col-2" src="weather_images/weather symbols/sunny_to_cloudy.png" />
+        <div class="day col">
+          <span class="day-name day-five"> </span> <br /><span class="description">Sunny</span>
+        </div>
+        <div class="hi col"><span class="hi-temp">94</span>°F</div>
+        <div class="low col"><span class="low-temp">66</span>°F</div>
+        <div class="descSm">Sunny</div>
+      </div>
+      <div class="row">
+        <img class="weekly-symbols col-2" src="weather_images/weather symbols/sunny_to_cloudy.png" />
+        <div class="day col">
+          <span class="day-name day-six"> </span> <br /><span class="description">Sunny</span>
+        </div>
+        <div class="hi col"><span class="hi-temp">89</span>°F</div>
+        <div class="low col"><span class="low-temp">60</span>°F</div>
+        <div class="descSm">Sunny</div>
+      </div>
+      <div class="row">
+        <img class="weekly-symbols col-2" src="weather_images/weather symbols/overcast.png" />
+        <div class="day col">
+          <span class="day-name day-seven"> </span> <br /><span class="description">Sunny</span>
+        </div>
+        <div class="hi col"><span class="hi-temp">82</span>°F</div>
+        <div class="low col"><span class="low-temp">57</span>°F</div>
+        <div class="descSm">Sunny</div>
+      </div>
+    </section>
+    <p>Have A Wonderful Day!</p>
+  </div>
+  <footer>
+    <a class="git" href="https://github.com/dndlc8/weather-site" target="_blank">Open-source code</a>
+    by Dominique De La Cruz
+    <br />
+  </footer>
+
+  <script src="src/index.js"></script>
+</body>
+
 </html>

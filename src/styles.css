@@ -2,6 +2,7 @@ body {
   background-image: linear-gradient(to bottom, #91e3fa 0%, #0153d6 100%);
   margin: 0px;
   padding: 0px;
+  font-family: "Playfair Display", serif;
 }
 
 h1 {
@@ -16,6 +17,13 @@ h2 {
   text-align: center;
   color: purple;
   font-size: 45px;
+  font-family: "Playfair Display", serif;
+}
+
+h3 {
+  text-align: left;
+  color: purple;
+  font-size: 30px;
   font-family: "Playfair Display", serif;
 }
 
@@ -61,6 +69,13 @@ footer {
   box-shadow: 1px 1px #02899b;
 }
 
+.city-name {
+  text-align: left;
+  color: purple;
+  font-size: 35px;
+  font-family: "Playfair Display", serif;
+}
+
 .current {
   margin: 10px 10px 10px 30px;
 }
@@ -92,8 +107,16 @@ footer {
 .weekly-symbols {
   display: block;
   top: -30px;
-  width: 10px;
-  padding: 40px;
+  width: 60px;
+  padding-top: 40px;
+}
+.description {
+  text-align: left;
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+}
+.descSm {
+  display: none;
 }
 .day {
   text-align: left;
@@ -119,55 +142,47 @@ footer {
   color: #54a2cf;
 }
 @media only screen and (min-width: 1001px) {
-  .current-image {
+  .main-image {
+    display: flex;
+    flex-direction: column;
     max-width: 600px;
     margin: 0;
     padding: 20px 0;
     float: right;
   }
-  .small-current-image {
-    display: none;
+  .hi {
+    margin-left: 130px;
   }
+}
+.weather-container {
+  display: flex;
+  flex-direction: row;
 }
 @media only screen and (max-width: 1000px) {
-  .current-image {
+  .main-image {
+    display: flex;
+    flex-direction: row;
     max-width: 350px;
     margin: 0;
-    padding: 20px 0;
-    float: right;
-  }
-  .small-current-image {
-    display: none;
-  }
-}
-@media only screen and (max-width: 800px) {
-  .current-image {
-    max-width: 180px;
-    margin: 0;
-    padding: 50px 0;
-    float: right;
+    padding: 0;
+    float: left;
+    width: 40%;
   }
 
-  .weekly {
-    color: purple;
-    font-size: 2em;
-    margin: 1.5em 6em 0;
-  }
-  .day {
-    text-align: right;
-    padding-top: 8px;
-    font-style: italic;
-    font-family: "Playfair Display", serif;
-  }
-  .weekly-symbols {
-    display: none;
-  }
+.weather-container {
+  display: flex;
+  flex-direction: column;
+}
 }
 @media only screen and (max-width: 600px) {
-  .small-current-image {
+  .weather-container {
+    flex-direction: column;
+  }
+  .main-image {
+    display: block;
     max-width: 400px;
     margin: 0;
-    padding: 50px 0;
+    padding: 0 0 50px 0;
     float: left;
   }
   .current-image {
@@ -186,5 +201,17 @@ footer {
   }
   .weekly-symbols {
     display: none;
+  }
+  .description {
+    display: none;
+  }
+  .descSm {
+    display: inline;
+    text-align: center;
+    padding-left: 20px;
+    font-size: 25px;
+  }
+  .hi {
+    margin-left: 0;
   }
 }

@@ -89,6 +89,7 @@ function searchNow(event) {
 
     function showTemp(response) {
       let currentCity = response.data.name;
+      console.log(response.data)
       h1.innerHTML = `${currentCity}`;
 
       let temp = Math.round(response.data.main.temp);
@@ -111,7 +112,7 @@ function searchNow(event) {
 
       let windSpeed = response.data.wind.speed;
       let wind = document.querySelector(".wind-speed");
-      wind.innerHTML = humidityTemp;
+      wind.innerHTML = windSpeed;
 
       function formatDate(timestamp) {
         let date = new Date(timestamp);

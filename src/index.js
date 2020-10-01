@@ -28,6 +28,21 @@ h2.innerHTML =
 let h3 = document.querySelector("h3");
 h3.innerHTML = null;
 
+//Background Change
+let header = document.querySelector("#header");
+
+if ((hours < 8) || (hours > 18) || (hours < 21)) {
+  document.body.classList.add("morning-background");
+  (header).classList.add("morning-header");
+} else if (hours >= 21) {
+  document.body.classList.add("night-background");
+  (header).classList.add("night-header");
+} else {
+  document.body.classList.add("day-background");
+  (header).classList.add("day-header");
+}
+
+
 function bigWeatherIcon(response) {
   let mainWeatherDescription = response.data.data[0].weather.code;
   let mainWeatherIcon = getWeatherIcon(mainWeatherDescription);
@@ -89,7 +104,6 @@ function searchNow(event) {
 
     function showTemp(response) {
       let currentCity = response.data.name;
-      console.log(response.data)
       h1.innerHTML = `${currentCity}`;
 
       let temp = Math.round(response.data.main.temp);

@@ -31,10 +31,10 @@ h3.innerHTML = null;
 //Background Change
 let header = document.querySelector("#header");
 
-if ((hours < 8) || (hours > 18) || (hours < 21)) {
+if (((hours > 6) && (hours < 8)) || ((hours > 18) && (hours < 21))) {
   document.body.classList.add("morning-background");
   (header).classList.add("morning-header");
-} else if (hours >= 21) {
+} else if ((hours >= 21) || (hours <=6 )) {
   document.body.classList.add("night-background");
   (header).classList.add("night-header");
 } else {
